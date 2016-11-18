@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Put that Postgres in that Node</title>
     <script src="vendor/jquery.min.js"></script>
     <script src="scripts/client-app.js"></script>
@@ -49,9 +50,22 @@
       </form>
 
       <h2>Books</h2>
+<div class='genres'>
+      <select>
+          <option value="none">Choose Genre Filter</option>
+          <option value="Sci-Fi">Science Fiction</option>
+          <option value="Mystery">Mystery</option>
+          <option value="Fantasy">fantasy</option>
+          <option value="Potato">Potato</option>
+          </select>
+
+
+     <button id="submit-genre"> Submit </button>
+
       <ul id="book-list">
 
       </ul>
+    </div>
     </main>
 
   </body>

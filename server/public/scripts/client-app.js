@@ -1,16 +1,38 @@
 $(document).ready(function () {
     getBooks();
 
+
     // add a book
     $('#book-submit').on('click', postBook);
     // delete a book
     $("#book-list").on('click', '.delete', deleteBook);
     // update a book
     $("#book-list").on('click', '.update', updateBook);
+
+    $('.genres').on('click', function () {
+      selectGenre();
+    });
 });
-/**
- * Retrieve books from server and append to DOM
- */
+
+
+
+ function selectGenre() {
+    var genre = $('select').val();
+
+   $.ajax({
+     type: 'GET',
+     url: '/books/' + genre,
+     success: function(books) {
+       appendBooks(books);
+     },
+     error: function() {
+       console.log('Database error');
+     }
+
+   });
+ }
+
+
 function getBooks() {
   $.ajax({
     type: 'GET',
@@ -24,9 +46,7 @@ function getBooks() {
 
   })
 }
-/**
- * Add a new book to the database and refresh the DOM
- */
+
 function postBook() {
   event.preventDefault();
 
@@ -35,7 +55,7 @@ function postBook() {
   $.each($('#book-form').serializeArray(), function (i, field) {
     book[field.name] = field.value;
   });
-  // convert edition to integer
+
   book.edition = parseInt(book.edition);
 
   console.log('book: ', book);
